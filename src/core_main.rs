@@ -328,7 +328,7 @@ pub fn core_main() -> Option<Vec<String>> {
         } else if args[0] == "--set-unlock-pin" {
             #[cfg(feature = "flutter")]
             if args.len() == 2 {
-                if crate::platform::is_installed() && {
+                if crate::platform::is_installed() {
                     if let Err(err) = crate::ipc::set_unlock_pin(args[1].to_owned(), false) {
                         println!("{err}");
                     } else {
