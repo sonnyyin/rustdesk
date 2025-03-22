@@ -344,7 +344,7 @@ pub fn core_main() -> Option<Vec<String>> {
             return None;
         } else if args[0] == "--set-id" {
             if args.len() == 2 {
-                if crate::platform::is_installed() && is_root() {
+                if crate::platform::is_installed() {
                     let old_id = crate::ipc::get_id();
                     let mut res = crate::ui_interface::change_id_shared(args[1].to_owned(), old_id);
                     if res.is_empty() {
