@@ -314,7 +314,7 @@ pub fn core_main() -> Option<Vec<String>> {
             return None;
         } else if args[0] == "--password" {
             if args.len() == 2 {
-                if crate::platform::is_installed() && is_root() {
+                if crate::platform::is_installed() {
                     if let Err(err) = crate::ipc::set_permanent_password(args[1].to_owned()) {
                         println!("{err}");
                     } else {
@@ -328,7 +328,7 @@ pub fn core_main() -> Option<Vec<String>> {
         } else if args[0] == "--set-unlock-pin" {
             #[cfg(feature = "flutter")]
             if args.len() == 2 {
-                if crate::platform::is_installed() && is_root() {
+                if crate::platform::is_installed() && {
                     if let Err(err) = crate::ipc::set_unlock_pin(args[1].to_owned(), false) {
                         println!("{err}");
                     } else {
@@ -358,7 +358,7 @@ pub fn core_main() -> Option<Vec<String>> {
             return None;
         } else if args[0] == "--config" {
             if args.len() == 2 && !args[0].contains("host=") {
-                if crate::platform::is_installed() && is_root() {
+                if crate::platform::is_installed() {
                     // encrypted string used in renaming exe.
                     let name = if args[1].ends_with(".exe") {
                         args[1].to_owned()
@@ -382,7 +382,7 @@ pub fn core_main() -> Option<Vec<String>> {
             }
             return None;
         } else if args[0] == "--option" {
-            if crate::platform::is_installed() && is_root() {
+            if crate::platform::is_installed() {
                 if args.len() == 2 {
                     let options = crate::ipc::get_options();
                     println!("{}", options.get(&args[1]).unwrap_or(&"".to_owned()));
@@ -394,7 +394,7 @@ pub fn core_main() -> Option<Vec<String>> {
             }
             return None;
         } else if args[0] == "--assign" {
-            if crate::platform::is_installed() && is_root() {
+            if crate::platform::is_installed() {
                 let max = args.len() - 1;
                 let pos = args.iter().position(|x| x == "--token").unwrap_or(max);
                 if pos < max {
