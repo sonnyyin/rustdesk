@@ -141,22 +141,17 @@ span.clear-input:hover {
 }
 
 .right-pane {
-    size: *;
-    background: color(gray-bg);
+    display: none;
 }
 
-.right-content {
-    overflow: scroll-indicator;
-    padding: 1.6em;
-    border-spacing: 1.6em;
-    size: *;
-    flow: vertical;
+.left-pane {
+    width: 100%;
 }
 
-@media platform == "OSX" {
-    .right-pane {
-        background: color(gray-bg-osx);
-    }
+.connect-status {
+    margin-top: auto;
+    padding-top: 1em;
+    border-top: #ccc solid 1px;
 }
 
 @mixin CARD {
